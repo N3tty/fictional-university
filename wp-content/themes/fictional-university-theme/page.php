@@ -17,7 +17,7 @@ while (have_posts()){
 
 <?php
 $theParent = wp_get_post_parent_id(get_the_ID());
-echo $theParent;
+
 if ($theParent){
 
  ?>
@@ -28,6 +28,7 @@ if ($theParent){
   <?php } ?>
 
 <?php
+
 $childArray = get_pages(array(
   'child_of' => get_the_ID()
 ));

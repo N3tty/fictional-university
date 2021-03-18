@@ -1107,10 +1107,19 @@ body.login {
     padding: 0
 }
   }
+  /*Added
+  .main-navigation .current-page-ancestor a,
+  by Natalie to highlight main menu link when on child page
+  .main-navigation .current_page_parent a,
+  by Natalie to highlight Blog link in main menu when on any blog related page*/
 .main-navigation .current-menu-item a,
+.main-navigation .current-page-ancestor a,
+.main-navigation .current_page_parent a,
 .main-navigation a:hover {
   color: #FAF0CA;
 }
+
+
 .page-banner {
   background-color: #000;
   padding: 80px 0 40px 0;

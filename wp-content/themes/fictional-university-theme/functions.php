@@ -10,8 +10,8 @@ if(strstr($_SERVER['SERVER_NAME'],'fictional-university.local')){
   wp_enqueue_script('main-university-javascript', 'http://localhost:3000/bundled.js', NULL, '1.0', true);
 } else {
   wp_enqueue_script('our-vendors-javascript', get_theme_file_uri('/bundled-assets/vendors~scripts.8c97d901916ad616a264.js'), NULL, '1.0', true);
-  wp_enqueue_script('main-university-javascript', get_theme_file_uri('/bundled-assets/scripts.bc49dbb23afb98cfc0f7.js'), NULL, '1.0', true);
-  wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.bc49dbb23afb98cfc0f7.css'));
+  wp_enqueue_script('main-university-javascript', get_theme_file_uri('/bundled-assets/scripts.f0fdadaa605798d4e16f.js'), NULL, '1.0', true);
+  wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.f0fdadaa605798d4e16f.css'));
 }
 
 }
@@ -27,5 +27,23 @@ function university_features(){
 }
 add_action('after_setup_theme', 'university_features');
 
+function highlight_menu_page ($classes, $item, $args) {
 
+// Use your menu location name from your function
+// if ('myHeaderMenuLocation' == $args->theme_location) {
+
+if (get_post_type() == 'post' AND $item->title == 'Blog') {
+
+            $classes[] = 'current-menu-item';
+
+        // "Past events" is needed for a future lesson. You will see why...
+      } else if (get_post_type() == 'event' AND $item->title == 'Events' /*OR is_page('past-events')AND $item->title == 'Events'*/) {
+        $classes[] = 'current-menu-item';
+        }
+    // }
+    return $classes;
+}
+
+// Loads the filter to modify the css from the navigation menu
+add_filter('nav_menu_css_class', 'highlight_menu_page', 10, 3);
  ?>

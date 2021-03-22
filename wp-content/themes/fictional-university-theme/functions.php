@@ -37,7 +37,7 @@ if (get_post_type() == 'post' AND $item->title == 'Blog') {
             $classes[] = 'current-menu-item';
 
         // "Past events" is needed for a future lesson. You will see why...
-      } else if (get_post_type() == 'event' AND $item->title == 'Events' /*OR is_page('past-events')AND $item->title == 'Events'*/) {
+      } else if (get_post_type() == 'event' AND $item->title == 'Events' OR is_page('past-events')AND $item->title == 'Events') {
         $classes[] = 'current-menu-item';
         }
     // }
@@ -46,4 +46,27 @@ if (get_post_type() == 'post' AND $item->title == 'Blog') {
 
 // Loads the filter to modify the css from the navigation menu
 add_filter('nav_menu_css_class', 'highlight_menu_page', 10, 3);
+
+function university_adjust_queries($query){
+  if (!is_admin() AND is_post_type_archive('event') AND $query->is_main_query())
+  {
+    $today=date('Ymd');
+
+  $query->set('meta_key', 'event_date');
+  $query->set('orderby', 'meta_value_num');
+ $query->set('order', 'ASC');
+ $query->set('meta_query',
+ array(
+   array(
+     'key' => 'event_date',
+     'compare' => '>=',
+     'value' => $today,
+     'type' => 'numeric'
+   )
+ )
+);
+  }
+}
+
+add_action('pre_get_posts', 'university_adjust_queries')
  ?>

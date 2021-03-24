@@ -39,7 +39,11 @@ if (get_post_type() == 'post' AND $item->title == 'Blog') {
         // "Past events" is needed for a future lesson. You will see why...
       } else if (get_post_type() == 'event' AND $item->title == 'Events' OR is_page('past-events')AND $item->title == 'Events') {
         $classes[] = 'current-menu-item';
-        }
+      }else if (get_post_type() == 'program' AND $item->title == 'Programs') {
+
+                    $classes[] = 'current-menu-item';
+
+              }
     // }
     return $classes;
 }
@@ -48,23 +52,29 @@ if (get_post_type() == 'post' AND $item->title == 'Blog') {
 add_filter('nav_menu_css_class', 'highlight_menu_page', 10, 3);
 
 function university_adjust_queries($query){
+  if (!is_admin() AND is_post_type_archive('program') AND $query->is_main_query())
+  {
+    $query->set('orderby', 'title');
+    $query->set('order', 'ASC');
+    $query->set('posts_per_page', -1);
+  }
   if (!is_admin() AND is_post_type_archive('event') AND $query->is_main_query())
   {
     $today=date('Ymd');
 
-  $query->set('meta_key', 'event_date');
-  $query->set('orderby', 'meta_value_num');
- $query->set('order', 'ASC');
- $query->set('meta_query',
- array(
-   array(
-     'key' => 'event_date',
-     'compare' => '>=',
-     'value' => $today,
-     'type' => 'numeric'
-   )
- )
-);
+    $query->set('meta_key', 'event_date');
+    $query->set('orderby', 'meta_value_num');
+    $query->set('order', 'ASC');
+    $query->set('meta_query',
+      array(
+          array(
+            'key' => 'event_date',
+            'compare' => '>=',
+            'value' => $today,
+            'type' => 'numeric'
+          )
+        )
+      );
   }
 }
 

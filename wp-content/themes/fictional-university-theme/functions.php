@@ -48,7 +48,9 @@ if(strstr($_SERVER['SERVER_NAME'],'fictional-university.local')){
   wp_enqueue_script('main-university-javascript', get_theme_file_uri('/bundled-assets/scripts.522c3ac4d61f6930b0e9.js'), NULL, '1.0', true);
   wp_enqueue_style('our-main-styles', get_theme_file_uri('/bundled-assets/styles.522c3ac4d61f6930b0e9.css'));
 }
-
+wp_localize_script('main-university-javascript', 'universityData', array(
+  'root_url'=>get_site_url()
+));
 }
 
 add_action('wp_enqueue_scripts','university_files');

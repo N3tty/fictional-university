@@ -58,7 +58,7 @@ while ($homePagePosts->have_posts())
   $homePagePosts->the_post();
   ?>
   <div class="event-summary">
-    <a class="event-summary__date event-summary__date--beige t-center" href="<a href="<?php the_permalink();?>">
+    <a class="event-summary__date event-summary__date--beige t-center" href="<?php the_permalink();?>">
       <span class="event-summary__month"><?php the_time('M');?></span>
       <span class="event-summary__day"><?php the_time('d'); ?></span>
     </a>

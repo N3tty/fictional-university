@@ -125,7 +125,8 @@ echo '<ul class="min-list link-list">';
 <li>
   <a href="<?php echo get_the_permalink($campus);?>">
   <?php echo get_the_title($campus); ?>
-  </a></li>
+  </a>
+</li>
     <?php
   }
 echo '</ul>';

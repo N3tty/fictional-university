@@ -76,6 +76,8 @@ function university_post_types()
   //Note Post Type
   register_post_type('note', array(
     'show_in_rest'=>true,
+    'capability_type'=>'note',
+    'map_meta_cap'=>true,
     'supports'=>array('title','editor'),
     'public'=> false,
     'show_ui'=>true,
@@ -87,6 +89,22 @@ function university_post_types()
       'singular_name' => 'Note'
     ),
     'menu_icon' =>'dashicons-welcome-write-blog'
+  ));
+
+  //Like Post Type
+  register_post_type('like', array(
+
+    'supports'=>array('title'),
+    'public'=> false,
+    'show_ui'=>true,
+    'labels'=> array(
+      'name'=>'Likes',
+      'add_new_item'=>'Add New Like',
+      'edit_item'=>'Edit Like',
+      'all_items'=>'All Likes',
+      'singular_name' => 'Like'
+    ),
+    'menu_icon' =>'dashicons-heart'
   ));
 
 }
